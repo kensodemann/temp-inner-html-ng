@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Blank </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +11,55 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-list>
+    <ion-item>
+      <ion-label [innerHtml]="theHtml"></ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding" [ngSwitch]="theState">
+    <div *ngSwitchCase="0">
+      <ion-list>
+        <ion-item>
+          <ion-label [innerHtml]="startingHtml"></ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchDefault>
+      <ion-list>
+        <ion-item>
+          <ion-label [innerHtml]="endingHtml"></ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
+
+  <ion-list>
+    <ion-list-header><ion-label> Other Test Items (from customer) </ion-label> </ion-list-header>
+    <ion-item>
+      <ion-label [innerHTML]="'<span>Span with Innerhtml</span>'"> </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label [innerHTML]="'Safecontent <span>spanContent</span> <script></script>'"> </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label
+        [innerHTML]="
+        '<span>Span with Innerhtml, sanitized by pipe</span>' | safeHtml
+      "
+      >
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label
+        [innerHTML]="
+        sanitizer.bypassSecurityTrustHtml(
+          '<span>span with Innerhtml, sanitized directly</span>'
+        )
+      "
+      >
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
